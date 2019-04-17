@@ -1,0 +1,39 @@
+package com.arjvik.robotics.ironreignbot;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class InMemoryStore implements BlogPostStore {
+
+	HashMap<String, List<BlogPost>> posts;
+	
+	public InMemoryStore() {
+		posts = new HashMap<>();
+	}
+	
+	@Override
+	public void assignBlogPost(String user, BlogPost post) {
+		if (posts.containsKey(user)) {
+			posts.get(user).add(post);
+		} else {
+			ArrayList<BlogPost> list = new ArrayList<>();
+			list.add(post);
+			posts.put(user, list);
+		}
+
+	}
+
+	@Override
+	public List<BlogPost> getBlogPosts(String user) {
+		return Collections.unmodifiableList(posts.get(user));
+	}
+
+	@Override
+	public Map<String, List<BlogPost>> getAllBlogPosts() {
+		return Collections.unmodifiableMap(posts);
+	}
+
+}
