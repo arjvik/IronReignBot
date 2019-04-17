@@ -15,7 +15,10 @@ public class App {
 
 		try {
 			Properties auth = new Properties();
+			
+			//TODO: fix this please - should not need target/classes/
 			auth.load(new FileInputStream(new File("target/classes/auth.properties")));
+			
 			String token = auth.getProperty("token");
 			
 			
