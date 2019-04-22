@@ -1,7 +1,5 @@
 package com.arjvik.robotics.ironreignbot;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
@@ -17,7 +15,7 @@ public class App {
 			Properties auth = new Properties();
 			
 			//TODO: fix this please - should not need target/classes/
-			auth.load(new FileInputStream(new File("target/classes/auth.properties")));
+			auth.load(App.class.getResourceAsStream("/auth.properties"));
 			
 			String token = auth.getProperty("token");
 			
