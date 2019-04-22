@@ -1,7 +1,5 @@
 package com.arjvik.robotics.ironreignbot.handlers;
 
-import com.arjvik.robotics.ironreignbot.AbstractHandler;
-
 import discord4j.core.DiscordClient;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.Message;

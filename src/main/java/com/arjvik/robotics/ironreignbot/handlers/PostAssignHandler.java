@@ -1,11 +1,10 @@
 package com.arjvik.robotics.ironreignbot.handlers;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
+import static com.arjvik.robotics.ironreignbot.stores.BlogPostStore.store;
 
-import com.arjvik.robotics.ironreignbot.AbstractHandler;
+import java.time.LocalDate;
+
 import com.arjvik.robotics.ironreignbot.BlogPost;
-import com.arjvik.robotics.ironreignbot.BlogPostStore;
 
 import discord4j.core.DiscordClient;
 import discord4j.core.event.domain.message.MessageCreateEvent;
@@ -13,8 +12,6 @@ import discord4j.core.object.entity.Message;
 
 public class PostAssignHandler extends AbstractHandler {
 
-	private BlogPostStore store = BlogPostStore.store;
-	
 	@Override
 	public void setupRoute(DiscordClient client) {
 		client.getEventDispatcher()

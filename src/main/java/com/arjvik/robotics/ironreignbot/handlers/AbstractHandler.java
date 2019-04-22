@@ -1,4 +1,4 @@
-package com.arjvik.robotics.ironreignbot;
+package com.arjvik.robotics.ironreignbot.handlers;
 
 import discord4j.core.object.entity.Message;
 
