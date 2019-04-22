@@ -1,10 +1,11 @@
-package com.arjvik.robotics.ironreignbot.handlers;
+package com.arjvik.robotics.ironreignbot.handlers.blogposts;
 
 import static com.arjvik.robotics.ironreignbot.stores.BlogPostStore.store;
 
 import java.time.LocalDate;
 
 import com.arjvik.robotics.ironreignbot.BlogPost;
+import com.arjvik.robotics.ironreignbot.handlers.AbstractImperativeHandler;
 
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.Message;
