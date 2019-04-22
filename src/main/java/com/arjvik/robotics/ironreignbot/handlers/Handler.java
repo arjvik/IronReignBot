@@ -1,5 +1,6 @@
 package com.arjvik.robotics.ironreignbot.handlers;
 
+import com.arjvik.robotics.ironreignbot.handlers.admin.AdminShutdownHandler;
 import com.arjvik.robotics.ironreignbot.handlers.blogposts.PostAssignHandler;
 import com.arjvik.robotics.ironreignbot.handlers.blogposts.PostDoneHandler;
 import com.arjvik.robotics.ironreignbot.handlers.blogposts.PostListHandler;
@@ -13,6 +14,7 @@ public interface Handler {
 	
 	@SuppressWarnings("unchecked")
 	public static Class<? extends Handler>[] handlers = new Class[]{
-			LoggingHandler.class, PingHandler.class, PostAssignHandler.class, PostListHandler.class, PostDoneHandler.class
+			LoggingHandler.class, PingHandler.class, PostAssignHandler.class, PostListHandler.class,
+			PostDoneHandler.class, AdminShutdownHandler.class
 	};
 }
