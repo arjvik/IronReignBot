@@ -7,17 +7,15 @@ import java.util.List;
 import com.arjvik.robotics.ironreignbot.BlogPost;
 import com.arjvik.robotics.ironreignbot.handlers.AbstractImperativeHandler;
 
-import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.Message;
 
 public class PostListHandler extends AbstractImperativeHandler {
 
 	@Override
-	protected void onMessageEvent(MessageCreateEvent e) {
-		Message msg = e.getMessage();
-		if (!msg.getContent().get().startsWith("!blog list"))
+	protected void onMessageEvent(Message msg, String content) {
+		if (!content.startsWith("!blog list"))
 			return;
-		String cmd = msg.getContent().get().substring("!blog list".length()).trim();
+		String cmd = content.substring("!blog list".length()).trim();
 		String user = null;
 		if (cmd.length() == 0)
 			user = msg.getAuthor().get().getMention();

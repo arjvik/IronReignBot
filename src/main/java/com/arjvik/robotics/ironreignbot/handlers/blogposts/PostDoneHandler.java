@@ -4,18 +4,15 @@ import static com.arjvik.robotics.ironreignbot.stores.BlogPostStore.store;
 
 import com.arjvik.robotics.ironreignbot.handlers.AbstractImperativeHandler;
 
-import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.Message;
 
 public class PostDoneHandler extends AbstractImperativeHandler {
 
 	@Override
-	protected void onMessageEvent(MessageCreateEvent e) {
-		Message msg = e.getMessage();
-		if (!msg.getContent().get().startsWith("!blog done"))
+	protected void onMessageEvent(Message msg, String content) {
+		if (!content.startsWith("!blog done"))
 			return;
-		String[] cmd = msg.getContent().map(s -> s.substring("!blog done".length()).trim())
-				.map((s -> s.split("\\s+", 2))).get();
+		String[] cmd = content.substring("!blog done".length()).trim().split("\\s+", 2);
 		if (cmd.length == 1 && cmd[0].matches("\\d+")) {
 			String user = msg.getAuthor().get().getMention();
 			int id = Integer.parseInt(cmd[0]);

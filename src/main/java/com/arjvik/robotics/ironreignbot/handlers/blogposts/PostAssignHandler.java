@@ -7,18 +7,15 @@ import java.time.LocalDate;
 import com.arjvik.robotics.ironreignbot.BlogPost;
 import com.arjvik.robotics.ironreignbot.handlers.AbstractImperativeHandler;
 
-import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.Message;
 
 public class PostAssignHandler extends AbstractImperativeHandler {
 
 	@Override
-	protected void onMessageEvent(MessageCreateEvent e) {
-		Message msg = e.getMessage();
-		if (!msg.getContent().get().startsWith("!blog assign"))
+	protected void onMessageEvent(Message msg, String content) {
+		if (!content.startsWith("!blog assign"))
 			return;
-		String[] cmd = msg.getContent().map(s -> s.substring("!blog assign".length()).trim())
-				.map((s -> s.split("\\s+", 2))).get();
+		String[] cmd = content.substring("!blog assign".length()).trim().split("\\s+", 2);
 		if (cmd.length < 2)
 			replyTo(msg, "Invalid usage of `!blog assign <@user> <blog post topic>`");
 		else if (!cmd[0].matches("<@\\d+>")) {
