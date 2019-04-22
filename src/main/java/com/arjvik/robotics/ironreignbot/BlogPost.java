@@ -48,7 +48,7 @@ public class BlogPost {
 
 	@Override
 	public String toString() {
-		return String.format("- %s (assigned on %s)", topic, date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
+		return String.format("%s (assigned on %s)", topic, date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
 	}
 
 }

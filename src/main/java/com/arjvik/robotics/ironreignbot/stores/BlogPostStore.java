@@ -15,4 +15,6 @@ public interface BlogPostStore {
 	
 	public Map<String, List<BlogPost>> getAllBlogPosts();
 	
+	public boolean removeBlogPost(String user, int id);
+	
 }
