@@ -14,14 +14,14 @@ public class PostDoneHandler extends AbstractHandler {
 		  .on(MessageCreateEvent.class)
 		  .subscribe(e -> {
 				Message msg = e.getMessage();
-				if (!msg.getContent().get().startsWith("!blog done "))
+				if (!msg.getContent().get().startsWith("!blog done"))
 					return;
-				String[] cmd = msg.getContent().map(s -> s.substring("!blog done ".length())).map((s -> s.split("\\s+", 2))).get();
+				String[] cmd = msg.getContent().map(s -> s.substring("!blog done".length()).trim()).map((s -> s.split("\\s+", 2))).get();
 				if (cmd.length == 1 && cmd[0].matches("\\d+")) {
 						String user = msg.getAuthor().get().getMention();
 						int id = Integer.parseInt(cmd[0]);
 						if (store.removeBlogPost(user, id)) {
-							replyTo(msg, "Sucessfully removed %s's blog post", user);
+							replyTo(msg, "Sucessfully removed %s's blog post (send `!blog list` again for new IDs)", user);
 						} else {
 							replyTo(msg, "Unable to remove post #%d from %s", id, user);
 						}
@@ -29,7 +29,7 @@ public class PostDoneHandler extends AbstractHandler {
 					String user = cmd[0];
 					int id = Integer.parseInt(cmd[1]);
 					if (store.removeBlogPost(user, id)) {
-						replyTo(msg, "Sucessfully removed %s's blog post", user);
+						replyTo(msg, "Sucessfully removed %s's blog post (send `!blog list` again for new IDs)", user);
 					} else {
 						replyTo(msg, "Unable to remove post #%d from %s", id, user);
 					}

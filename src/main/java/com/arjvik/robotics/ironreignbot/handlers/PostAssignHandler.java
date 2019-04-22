@@ -18,9 +18,9 @@ public class PostAssignHandler extends AbstractHandler {
 			  .on(MessageCreateEvent.class)
 			  .subscribe(e -> {
 					Message msg = e.getMessage();
-					if (!msg.getContent().get().startsWith("!blog assign "))
+					if (!msg.getContent().get().startsWith("!blog assign"))
 						return;
-					String[] cmd = msg.getContent().map(s -> s.substring("!blog assign ".length())).map((s -> s.split("\\s+", 2))).get();
+					String[] cmd = msg.getContent().map(s -> s.substring("!blog assign".length()).trim()).map((s -> s.split("\\s+", 2))).get();
 					if (cmd.length < 2)
 						replyTo(msg, "Invalid usage of `!blog assign <@user> <blog post topic>`");
 					else if (!cmd[0].matches("<@\\d+>")) {
