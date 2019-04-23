@@ -19,7 +19,7 @@ public class PostListHandler extends AbstractImperativeHandler {
 		String user = null;
 		if (cmd.length() == 0)
 			user = msg.getAuthor().get().getMention();
-		else if (cmd.matches("<@\\d+>"))
+		else if (cmd.matches("<@!?\\d+>"))
 			user = cmd;
 		else if (cmd.equals("all"))
 			user = "all";

@@ -21,7 +21,7 @@ public class PostDoneHandler extends AbstractImperativeHandler {
 			} else {
 				replyTo(msg, "Unable to remove post #%d from %s", id, user);
 			}
-		} else if (cmd.length == 2 && cmd[0].matches("<@\\d+>") && cmd[1].matches("\\d+")) {
+		} else if (cmd.length == 2 && cmd[0].matches("<!?@\\d+>") && cmd[1].matches("\\d+")) {
 			String user = cmd[0];
 			int id = Integer.parseInt(cmd[1]);
 			if (store.removeBlogPost(user, id)) {

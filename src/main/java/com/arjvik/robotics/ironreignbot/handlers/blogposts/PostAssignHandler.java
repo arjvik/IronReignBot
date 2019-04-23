@@ -18,7 +18,7 @@ public class PostAssignHandler extends AbstractImperativeHandler {
 		String[] cmd = content.substring("!blog assign".length()).trim().split("\\s+", 2);
 		if (cmd.length < 2)
 			replyTo(msg, "Invalid usage of `!blog assign <@user> <blog post topic>`");
-		else if (!cmd[0].matches("<@\\d+>")) {
+		else if (!cmd[0].matches("<@!?\\d+>")) {
 			replyTo(msg, "Invalid user: %s", cmd[0]);
 		} else {
 			BlogPost post = new BlogPost(cmd[1], LocalDate.now());
