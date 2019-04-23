@@ -18,9 +18,9 @@ public class PostListHandler extends AbstractImperativeHandler {
 		String cmd = content.substring("!blog list".length()).trim();
 		String user = null;
 		if (cmd.length() == 0)
-			user = msg.getAuthor().get().getMention().replaceAll("<@!(\\d+)>", "<@\\1>");
-		else if (cmd.matches("<@!?\\d+>"))
-			user = cmd.replaceAll("<@!(\\d+)>", "<@\\1>");
+			user = formatMention(msg.getAuthor().get().getMention());
+		else if (isMention(cmd))
+			user = formatMention(cmd);
 		else if (cmd.equals("all"))
 			user = "all";
 		if (user == null) {
