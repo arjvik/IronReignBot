@@ -25,7 +25,7 @@ public class PostListHandler extends AbstractImperativeHandler {
 			user = "all";
 
 		if (user == null) {
-			replyTo(msg, "Invalid usage of `!blog list [<@user>]`");
+			replyTo(msg, "Invalid usage of `!blog list [<@user> | all]`");
 		} else if (user.equals("all")) {
 			for (String u : store.getAllBlogPosts().keySet()) {
 				if (!store.getBlogPosts(u).isEmpty()) {
