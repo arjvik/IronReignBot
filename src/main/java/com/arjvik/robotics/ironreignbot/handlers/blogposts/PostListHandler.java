@@ -42,7 +42,7 @@ public class PostListHandler extends AbstractImperativeHandler {
 			for (int id = 0; id < posts.size(); id++)
 				replyTo(msg, "%d. %s", id + 1, posts.get(id));
 		} else {
-			replyTo(msg, "No blog posts assigned to %s", user);
+			replyTo(msg, "(ben w/h) No blog posts assigned to %s", user);
 		}
 	}
 
