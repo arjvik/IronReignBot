@@ -5,7 +5,7 @@ import com.arjvik.robotics.ironreignbot.handlers.admin.AdminShutdownHandler;
 import com.arjvik.robotics.ironreignbot.handlers.blogposts.PostAssignHandler;
 import com.arjvik.robotics.ironreignbot.handlers.blogposts.PostDoneHandler;
 import com.arjvik.robotics.ironreignbot.handlers.blogposts.PostListHandler;
-import com.arjvik.robotics.ironreignbot.handlers.misc.LoggingHandler;
+import com.arjvik.robotics.ironreignbot.handlers.misc.BetterLoggingHandler;
 
 import discord4j.core.DiscordClient;
 
@@ -14,7 +14,7 @@ public interface Handler {
 	
 	@SuppressWarnings("unchecked")
 	public static Class<? extends Handler>[] handlers = new Class[]{
-			LoggingHandler.class, PostAssignHandler.class, PostListHandler.class,
+			BetterLoggingHandler.class, PostAssignHandler.class, PostListHandler.class,
 			PostDoneHandler.class, AdminShutdownHandler.class, AdminPingHandler.class
 	};
 }
