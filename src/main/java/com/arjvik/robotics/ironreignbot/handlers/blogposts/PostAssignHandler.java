@@ -16,6 +16,7 @@ public class PostAssignHandler extends AbstractImperativeHandler {
 		if (!content.startsWith("!blog assign"))
 			return;
 		String[] cmd = content.substring("!blog assign".length()).trim().split("\\s+", 2);
+		cmd[0] = cmd[0].replaceAll("<@!(\\d+)>", "<@\\1>");
 		if (cmd.length < 2)
 			replyTo(msg, "Invalid usage of `!blog assign <@user> <blog post topic>`");
 		else if (!cmd[0].matches("<@!?\\d+>")) {
