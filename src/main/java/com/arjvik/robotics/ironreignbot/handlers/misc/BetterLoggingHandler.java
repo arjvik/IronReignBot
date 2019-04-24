@@ -17,6 +17,7 @@ public class BetterLoggingHandler extends AbstractHandler {
 		client.getEventDispatcher()
 			  .on(MessageCreateEvent.class)
 			  .map(MessageCreateEvent::getMessage)
+			  .filter(message -> message.getContent().get().startsWith("!") || message.getGuild().block().getName().equals("ironReignBot"))
 			  .subscribe(message -> {
 					log.log(Level.INFO, String.format(
 						"%s <@%d> | \"%s\"",
