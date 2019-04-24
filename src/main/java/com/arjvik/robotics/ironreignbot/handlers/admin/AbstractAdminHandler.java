@@ -16,7 +16,8 @@ public abstract class AbstractAdminHandler extends AbstractHandler {
 		client.getEventDispatcher()
 			  .on(MessageCreateEvent.class)
 			  .filter(e -> e.getMessage().getAuthor().map(User::getMention).map(ADMIN_USER::equals).orElse(false))
-			  .subscribe(e -> onMessageEvent(e.getMessage(), e.getMessage().getContent().orElse(null), client));
+			  .filter(e -> e.getMessage().getContent().isPresent())
+			  .subscribe(e -> onMessageEvent(e.getMessage(), e.getMessage().getContent().get(), client));
 	}
 	
 	protected abstract void onMessageEvent(Message msg, String content, DiscordClient client);

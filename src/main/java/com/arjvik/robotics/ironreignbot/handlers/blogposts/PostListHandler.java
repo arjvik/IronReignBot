@@ -6,9 +6,11 @@ import java.util.List;
 
 import com.arjvik.robotics.ironreignbot.BlogPost;
 import com.arjvik.robotics.ironreignbot.handlers.AbstractImperativeHandler;
+import com.arjvik.robotics.ironreignbot.handlers.EventHandler;
 
 import discord4j.core.object.entity.Message;
 
+@EventHandler
 public class PostListHandler extends AbstractImperativeHandler {
 
 	@Override

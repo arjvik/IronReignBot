@@ -6,9 +6,11 @@ import java.time.LocalDate;
 
 import com.arjvik.robotics.ironreignbot.BlogPost;
 import com.arjvik.robotics.ironreignbot.handlers.AbstractImperativeHandler;
+import com.arjvik.robotics.ironreignbot.handlers.EventHandler;
 
 import discord4j.core.object.entity.Message;
 
+@EventHandler
 public class PostAssignHandler extends AbstractImperativeHandler {
 
 	@Override
