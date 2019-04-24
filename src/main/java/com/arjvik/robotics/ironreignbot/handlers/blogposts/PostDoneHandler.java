@@ -2,13 +2,13 @@ package com.arjvik.robotics.ironreignbot.handlers.blogposts;
 
 import static com.arjvik.robotics.ironreignbot.stores.BlogPostStore.store;
 
-import com.arjvik.robotics.ironreignbot.handlers.AbstractImperativeHandler;
+import com.arjvik.robotics.ironreignbot.handlers.AbstractMessageHandler;
 import com.arjvik.robotics.ironreignbot.handlers.EventHandler;
 
 import discord4j.core.object.entity.Message;
 
 @EventHandler
-public class PostDoneHandler extends AbstractImperativeHandler {
+public class PostDoneHandler extends AbstractMessageHandler {
 
 	@Override
 	protected void onMessageEvent(Message msg, String content) {

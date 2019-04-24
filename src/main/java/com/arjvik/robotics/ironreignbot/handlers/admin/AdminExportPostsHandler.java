@@ -8,11 +8,11 @@ import discord4j.core.DiscordClient;
 import discord4j.core.object.entity.Message;
 
 @EventHandler
-public class AdminPostsDumpHandler extends AbstractAdminHandler {
+public class AdminExportPostsHandler extends AbstractAdminHandler {
 
 	@Override
 	protected void onMessageEvent(Message msg, String content, DiscordClient client) {
-		if(content.equals("!dump posts"))
+		if(content.equals("!admin export-posts"))
 			replyTo(msg, store.getAllBlogPosts().toString());
 	}
 

@@ -5,13 +5,13 @@ import static com.arjvik.robotics.ironreignbot.stores.BlogPostStore.store;
 import java.util.List;
 
 import com.arjvik.robotics.ironreignbot.BlogPost;
-import com.arjvik.robotics.ironreignbot.handlers.AbstractImperativeHandler;
+import com.arjvik.robotics.ironreignbot.handlers.AbstractMessageHandler;
 import com.arjvik.robotics.ironreignbot.handlers.EventHandler;
 
 import discord4j.core.object.entity.Message;
 
 @EventHandler
-public class PostListHandler extends AbstractImperativeHandler {
+public class PostListHandler extends AbstractMessageHandler {
 
 	@Override
 	protected void onMessageEvent(Message msg, String content) {
