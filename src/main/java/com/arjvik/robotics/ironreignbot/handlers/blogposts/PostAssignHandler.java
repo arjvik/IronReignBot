@@ -23,8 +23,8 @@ public class PostAssignHandler extends AbstractImperativeHandler {
 			replyTo(msg, "Invalid user: %s", cmd[0]);
 		} else {
 			BlogPost post = new BlogPost(cmd[1], LocalDate.now());
-			store.assignBlogPost(cmd[0], post);
-			replyTo(msg, "Assigned %s blog post \"%s\"", cmd[0], cmd[1]);
+			store.assignBlogPost(getIDFromMention(cmd[0]), post);
+			replyTo(msg, "Assigned %s blog post \"%s\"", formatMention(cmd[0]), cmd[1]);
 		}
 	}
 

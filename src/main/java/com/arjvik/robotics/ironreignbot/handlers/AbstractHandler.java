@@ -8,12 +8,25 @@ public abstract class AbstractHandler implements Handler {
 		return message.getChannel().flatMap(ch -> ch.createMessage(String.format(format, args))).block();
 	}
 	
+	protected static long getIDFromMention(String mention) {
+		return Long.parseLong(mention.replaceAll("<@!?(\\d+)>", "\\1"));
+		
+	}
+	
+	protected static String formatMention(long id) {
+		return String.format("<@!%d>", id);
+	}
+	
 	protected static String formatMention(String mention) {
-		return mention.replaceAll("<@!?(\\d+)>", "<@!\\1>");
+		return formatMention(getIDFromMention(mention));
 	}
 	
 	protected static boolean isMention(String mention) {
 		return mention.matches("<@!?\\d+>");
+	}
+	
+	protected static long getAuthorID(Message message) {
+		return message.getAuthor().get().getId().asLong();
 	}
 
 }

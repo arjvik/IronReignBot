@@ -9,12 +9,12 @@ public interface BlogPostStore {
 	
 	public static final BlogPostStore store = new InMemoryStore();
 	
-	public void assignBlogPost(String user, BlogPost post);
+	public void assignBlogPost(long userID, BlogPost post);
 	
-	public List<BlogPost> getBlogPosts(String user);
+	public List<BlogPost> getBlogPosts(long userID);
 	
-	public Map<String, List<BlogPost>> getAllBlogPosts();
+	public Map<Long, List<BlogPost>> getAllBlogPosts();
 	
-	public boolean removeBlogPost(String user, int id);
+	public boolean removeBlogPost(long userID, int id);
 	
 }
