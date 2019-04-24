@@ -14,7 +14,7 @@ public interface Handler {
 	
 	@SuppressWarnings("unchecked")
 	public static Class<? extends Handler>[] handlers = new Class[]{
-			BetterLoggingHandler.class, PostAssignHandler.class, PostListHandler.class,
-			PostDoneHandler.class, AdminShutdownHandler.class, AdminPingHandler.class
+			PostAssignHandler.class, PostListHandler.class, PostDoneHandler.class, 
+			AdminShutdownHandler.class, AdminPingHandler.class, BetterLoggingHandler.class
 	};
 }

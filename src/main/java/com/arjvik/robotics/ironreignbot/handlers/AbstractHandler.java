@@ -9,8 +9,7 @@ public abstract class AbstractHandler implements Handler {
 	}
 	
 	protected static long getIDFromMention(String mention) {
-		return Long.parseLong(mention.replaceAll("<@!?(\\d+)>", "\\1"));
-		
+		return Long.parseLong(mention.replaceAll("<@!?(\\d+)>", "$1"));
 	}
 	
 	protected static String formatMention(long id) {

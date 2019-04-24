@@ -15,7 +15,6 @@ public abstract class AbstractAdminHandler extends AbstractHandler {
 	public void setupRoute(DiscordClient client) {
 		client.getEventDispatcher()
 			  .on(MessageCreateEvent.class)
-			  .filter(e -> e.getMessage().getContent().map(s -> s.startsWith("!admin")).orElse(false))
 			  .filter(e -> e.getMessage().getAuthor().map(User::getMention).map(ADMIN_USER::equals).orElse(false))
 			  .subscribe(e -> onMessageEvent(e.getMessage(), e.getMessage().getContent().orElse(null), client));
 	}

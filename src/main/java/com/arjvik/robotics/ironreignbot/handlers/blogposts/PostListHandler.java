@@ -21,7 +21,7 @@ public class PostListHandler extends AbstractImperativeHandler {
 			userID = msg.getAuthor().get().getId().asLong();
 		else if (isMention(cmd))
 			userID = getIDFromMention(cmd);
-		else if (cmd.equals("all"))
+		else if (cmd.equals("all") || cmd.equals("@everyone"))
 			userID = 1;
 		if (userID == 0) {
 			replyTo(msg, "Invalid usage of `!blog list [<@user> | all]`");
