@@ -9,7 +9,11 @@ Discord bot for our robotics team [Iron Reign Robotics](https://github.com/IronR
 - `!blog done [<@user>] <id>`: Mark a post as completed by its id.
 
 ### Miscelaneous
-- `!ping`: Respond `no u` to test if bot is up.
+- `!ping`: Respond `Pong!` to test if bot is up.
+- `!vote`: React with a :thumbsup: and :thumbsdown: to facilitate a vote.
+
+### Admin Commands
+- `!admin export-posts`: Export all blog posts.
 - `!admin shutdown`: Shut down the bot.
 
 ## Configuration
@@ -20,7 +24,7 @@ This file should have the following format:
 
 ```yaml
 token: INSERT-DISCORD-BOT-TOKEN-HERE
-admin: <@ADMIN-USER-MENTION-ID-HERE>
+admin: ADMIN-USER-ID-HERE
 ```
 
 To run this bot, you can simply use Maven to build a jar file. Be aware that by using the jar provided in the releases, you will be using the Iron Reign Discord token.
@@ -31,3 +35,5 @@ This bot is split up into multiple handlers. Each handler is responsible for res
 You create a handler by making a class that extends `AbstractHandler` and implementing the requisite method, adding a event handler to the Discord4J client.
 It is probably easier to make a class extending `AbstractImperativeHandler`, which takes care of the boilerplate of defining the event handler and extracting the needed domain objects.
 If you wish to add an Admin-locked handler, create a class that extends `AbstractAdminHandler`. This takes care of the boilerplate of `AbstractImperativeHandler`, but also ensures that the command is only called by the Admin user.
+
+To register a handler, add the `@EventHandler` annotation to it. Disabling it is as easy as adding `@Disabled` (just like an FTC OpMode!).
