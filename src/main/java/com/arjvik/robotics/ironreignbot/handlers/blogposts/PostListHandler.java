@@ -17,6 +17,7 @@ public class PostListHandler extends AbstractMessageHandler {
 	protected void onMessageEvent(Message msg, String content) {
 		if (!content.startsWith("!blog list"))
 			return;
+		
 		String cmd = content.substring("!blog list".length()).trim();
 		long userID = 0;
 		if (cmd.length() == 0)
@@ -25,24 +26,30 @@ public class PostListHandler extends AbstractMessageHandler {
 			userID = getIDFromMention(cmd);
 		else if (cmd.equals("all") || cmd.equals("@everyone"))
 			userID = 1;
+		
 		if (userID == 0) {
 			replyTo(msg, "Invalid usage of `!blog list [<@user> | all]`");
 		} else if (userID == 1) {
+			StringBuilder message = new StringBuilder();
 			for (long id : store.getAllBlogPosts().keySet()) {
 				if (!store.getBlogPosts(id).isEmpty()) {
-					replyTo(msg, "Blog posts assigned to %s:", formatMention(id));
+					message.append(String.format("Blog posts assigned to %s:%n", formatMention(id)));
 					List<BlogPost> posts = store.getBlogPosts(id);
 					for (int postID = 0; postID < posts.size(); postID++)
-						replyTo(msg, "%d. %s", postID + 1, posts.get(postID));
+						message.append(String.format("%d. %s%n", postID + 1, posts.get(postID)));
 				} else {
-					replyTo(msg, "No blog posts assigned to %s", formatMention(id));
+					message.append(String.format("No blog posts assigned to %s%n", formatMention(id)));
 				}
+				message.append("\n");
 			}
+			replyTo(msg, message.toString());
 		} else if (store.getAllBlogPosts().containsKey(userID) && !store.getBlogPosts(userID).isEmpty()) {
-			replyTo(msg, "Blog posts assigned to %s:", formatMention(userID));
+			StringBuilder message = new StringBuilder();
+			message.append(String.format("Blog posts assigned to %s:%n", formatMention(userID)));
 			List<BlogPost> posts = store.getBlogPosts(userID);
 			for (int postID = 0; postID < posts.size(); postID++)
-				replyTo(msg, "%d. %s", postID + 1, posts.get(postID));
+				message.append(String.format("%d. %s%n", postID + 1, posts.get(postID)));
+			replyTo(msg, message.toString());
 		} else {
 			replyTo(msg, "No blog posts assigned to %s", formatMention(userID));
 		}
