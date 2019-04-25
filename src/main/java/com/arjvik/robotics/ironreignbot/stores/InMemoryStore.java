@@ -2,18 +2,18 @@ package com.arjvik.robotics.ironreignbot.stores;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.arjvik.robotics.ironreignbot.BlogPost;
 
 class InMemoryStore implements BlogPostStore {
 
-	HashMap<Long, List<BlogPost>> posts;
+	Map<Long, List<BlogPost>> posts;
 	
 	public InMemoryStore() {
-		posts = new HashMap<>();
+		posts = new ConcurrentHashMap<>();
 	}
 	
 	@Override
