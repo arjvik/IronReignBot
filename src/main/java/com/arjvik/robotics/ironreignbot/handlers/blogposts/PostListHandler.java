@@ -42,7 +42,10 @@ public class PostListHandler extends AbstractMessageHandler {
 				}
 				message.append("\n");
 			}
-			replyTo(msg, message.toString());
+			if (message.length() > 0)
+				replyTo(msg, message.toString());
+			else
+				replyTo(msg, "Nobody has any blog posts yet.");
 		} else if (store.getAllBlogPosts().containsKey(userID) && !store.getBlogPosts(userID).isEmpty()) {
 			StringBuilder message = new StringBuilder();
 			message.append(String.format("Blog posts assigned to %s:%n", formatMention(userID)));
