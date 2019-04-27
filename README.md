@@ -3,17 +3,21 @@ Discord bot for our robotics team [Iron Reign Robotics](https://github.com/IronR
 
 ## Commands
 
-### Blog Posts
+### Assign Blog Posts
 - `!blog assign <@user> <blog post>`: Assign somebody a blogpost.
 - `!blog list [<@user> | all]`: List all blog posts assigned to somebody, all users, or by default yourself.
 - `!blog done [<@user>] <id>`: Mark a post as completed by its id.
+
+### Manage Blog Posts
+- `!admin clear-posts`: Delete all blog posts.
+- `!admin export-posts`: Export all posts to JSON.
+- <code>!admin import-posts \`\`\`\<JSON\>\`\`\`</code>: Import blog posts from JSON.
 
 ### Miscelaneous
 - `!ping`: Respond `Pong!` to test if bot is up.
 - `!vote`: React with a :thumbsup: and :thumbsdown: to facilitate a vote.
 
 ### Admin Commands
-- `!admin export-posts`: Export all blog posts.
 - `!admin shutdown`: Shut down the bot.
 
 ## Configuration
