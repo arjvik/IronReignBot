@@ -3,6 +3,8 @@ package com.arjvik.robotics.ironreignbot.handlers.admin;
 import static com.arjvik.robotics.ironreignbot.stores.BlogPostStore.store;
 
 import com.arjvik.robotics.ironreignbot.handlers.EventHandler;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import discord4j.core.DiscordClient;
 import discord4j.core.object.entity.Message;
@@ -13,7 +15,7 @@ public class AdminExportPostsHandler extends AbstractAdminHandler {
 	@Override
 	protected void onMessageEvent(Message msg, String content, DiscordClient client) {
 		if(content.equals("!admin export-posts"))
-			replyTo(msg, store.getAllBlogPosts().toString());
+			replyTo(msg, "```\n%s\n```", store.exportStore());
 	}
 
 }

@@ -32,7 +32,7 @@ public class App {
 
 		String token = auth.getProperty("token");
 		
-		AbstractAdminHandler.ADMIN_USER = auth.getProperty("admin");
+		AbstractAdminHandler.ADMIN_USER_ID = Long.parseLong(auth.getProperty("admin"));
 
 		final DiscordClient client = new DiscordClientBuilder(token).build();
 		for (Class<? extends Handler> c : getHandlers()) {

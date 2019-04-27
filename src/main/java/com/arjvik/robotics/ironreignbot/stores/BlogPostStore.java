@@ -17,4 +17,10 @@ public interface BlogPostStore {
 	
 	public boolean removeBlogPost(long userID, int id);
 	
+	public void removeAllPosts();
+	
+	public String exportStore();
+	
+	public boolean importStore(String input);
+	
 }
