@@ -1,8 +1,9 @@
-package com.arjvik.robotics.ironreignbot.handlers.admin;
+package com.arjvik.robotics.ironreignbot.handlers.blogposts;
 
 import static com.arjvik.robotics.ironreignbot.stores.BlogPostStore.store;
 
 import com.arjvik.robotics.ironreignbot.handlers.EventHandler;
+import com.arjvik.robotics.ironreignbot.handlers.admin.AbstractAdminHandler;
 
 import discord4j.core.DiscordClient;
 import discord4j.core.object.entity.Message;

@@ -1,4 +1,4 @@
-package com.arjvik.robotics.ironreignbot.handlers.admin;
+package com.arjvik.robotics.ironreignbot.handlers.blogposts;
 
 import discord4j.core.DiscordClient;
 import discord4j.core.object.entity.Message;
@@ -6,6 +6,7 @@ import discord4j.core.object.entity.Message;
 import static com.arjvik.robotics.ironreignbot.stores.BlogPostStore.store;
 
 import com.arjvik.robotics.ironreignbot.handlers.EventHandler;
+import com.arjvik.robotics.ironreignbot.handlers.admin.AbstractAdminHandler;
 
 @EventHandler
 public class AdminImportPostsHandler extends AbstractAdminHandler {

@@ -16,6 +16,7 @@ Discord bot for our robotics team [Iron Reign Robotics](https://github.com/IronR
 ### Miscelaneous
 - `!ping`: Respond `Pong!` to test if bot is up.
 - `!vote`: React with a :thumbsup: and :thumbsdown: to facilitate a vote.
+- `!help`: Respond with a help message.
 
 ### Admin Commands
 - `!admin shutdown`: Shut down the bot.
