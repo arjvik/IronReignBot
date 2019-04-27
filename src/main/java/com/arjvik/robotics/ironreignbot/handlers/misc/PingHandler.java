@@ -1,7 +1,6 @@
 package com.arjvik.robotics.ironreignbot.handlers.misc;
 
 import com.arjvik.robotics.ironreignbot.handlers.AbstractMessageHandler;
-import com.arjvik.robotics.ironreignbot.handlers.Disabled;
 import com.arjvik.robotics.ironreignbot.handlers.EventHandler;
 
 import discord4j.core.object.entity.Message;

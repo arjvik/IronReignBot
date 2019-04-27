@@ -1,18 +1,15 @@
 package com.arjvik.robotics.ironreignbot;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BlogPost {
 	
 	public final String topic;
-	public final LocalDate date;
+	public final String date;
 
-	public BlogPost(String topic, LocalDate date) {
+	@JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+	public BlogPost(@JsonProperty("topic") String topic, @JsonProperty("date") String date) {
 		this.topic = topic;
 		this.date = date;
 	}
@@ -21,7 +18,7 @@ public class BlogPost {
 		return topic;
 	}
 
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
 	@Override
@@ -51,7 +48,7 @@ public class BlogPost {
 
 	@Override
 	public String toString() {
-		return String.format("%s (assigned on %s)", topic, date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
+		return String.format("%s (assigned %s)", topic, date);
 	}
 
 }
