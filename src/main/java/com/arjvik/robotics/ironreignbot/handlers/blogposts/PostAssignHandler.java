@@ -8,18 +8,16 @@ import java.time.format.FormatStyle;
 
 import com.arjvik.robotics.ironreignbot.BlogPost;
 import com.arjvik.robotics.ironreignbot.handlers.AbstractMessageHandler;
-import com.arjvik.robotics.ironreignbot.handlers.EventHandler;
+import com.arjvik.robotics.ironreignbot.handlers.annotations.EventHandler;
 
 import discord4j.core.object.entity.Message;
 
-@EventHandler
+@EventHandler("!blog assign")
 public class PostAssignHandler extends AbstractMessageHandler {
 
 	@Override
 	protected void onMessageEvent(Message msg, String content) {
-		if (!content.startsWith("!blog assign"))
-			return;
-		String[] cmd = content.substring("!blog assign".length()).trim().split("\\s+", 2);
+		String[] cmd = content.split("\\s+", 2);
 		if (cmd.length < 2 || !isMention(cmd[0]))
 			replyTo(msg, "Invalid usage of `!blog assign <@user> <blog post topic>`");
 		else {

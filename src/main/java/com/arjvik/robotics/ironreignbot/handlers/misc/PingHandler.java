@@ -1,17 +1,16 @@
 package com.arjvik.robotics.ironreignbot.handlers.misc;
 
 import com.arjvik.robotics.ironreignbot.handlers.AbstractMessageHandler;
-import com.arjvik.robotics.ironreignbot.handlers.EventHandler;
+import com.arjvik.robotics.ironreignbot.handlers.annotations.EventHandler;
 
 import discord4j.core.object.entity.Message;
 
-@EventHandler
+@EventHandler("!ping")
 public class PingHandler extends AbstractMessageHandler {
 
 	@Override
 	protected void onMessageEvent(Message msg, String content) {
-		if (content.equals("!ping"))
-			replyTo(msg, "Pong!");
+		replyTo(msg, "Pong!");
 	}
 
 }

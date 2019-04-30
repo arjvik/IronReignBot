@@ -6,25 +6,21 @@ import java.util.List;
 
 import com.arjvik.robotics.ironreignbot.BlogPost;
 import com.arjvik.robotics.ironreignbot.handlers.AbstractMessageHandler;
-import com.arjvik.robotics.ironreignbot.handlers.EventHandler;
+import com.arjvik.robotics.ironreignbot.handlers.annotations.EventHandler;
 
 import discord4j.core.object.entity.Message;
 
-@EventHandler
+@EventHandler("!blog list")
 public class PostListHandler extends AbstractMessageHandler {
 
 	@Override
 	protected void onMessageEvent(Message msg, String content) {
-		if (!content.startsWith("!blog list"))
-			return;
-		
-		String cmd = content.substring("!blog list".length()).trim();
 		long userID = 0;
-		if (cmd.length() == 0)
+		if (content.length() == 0)
 			userID = msg.getAuthor().get().getId().asLong();
-		else if (isMention(cmd))
-			userID = getIDFromMention(cmd);
-		else if (cmd.equals("all") || cmd.equals("@everyone"))
+		else if (isMention(content))
+			userID = getIDFromMention(content);
+		else if (content.equals("all") || content.equals("@everyone"))
 			userID = 1;
 		
 		if (userID == 0) {

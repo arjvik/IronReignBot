@@ -9,10 +9,10 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.arjvik.robotics.ironreignbot.handlers.Disabled;
-import com.arjvik.robotics.ironreignbot.handlers.EventHandler;
 import com.arjvik.robotics.ironreignbot.handlers.Handler;
 import com.arjvik.robotics.ironreignbot.handlers.admin.AbstractAdminHandler;
+import com.arjvik.robotics.ironreignbot.handlers.annotations.Disabled;
+import com.arjvik.robotics.ironreignbot.handlers.annotations.EventHandler;
 
 import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
@@ -35,8 +35,7 @@ public class App {
 		AbstractAdminHandler.ADMIN_USER_ID = Long.parseLong(auth.getProperty("admin"));
 
 		final DiscordClient client = new DiscordClientBuilder(token).build();
-		for (Class<? extends Handler> c : getHandlers()) {
-			Handler handler = c.getConstructor().newInstance();
+		for (Handler handler : getHandlers()) {
 			handler.setupRoute(client);
 		}
 
@@ -45,19 +44,23 @@ public class App {
 	}
 	
 	
-	private static List<Class<? extends Handler>> getHandlers() {
+	private static List<Handler> getHandlers() throws ReflectiveOperationException {
 		String pkg = Handler.class.getPackage().getName();
 		String handlerAnnotation = EventHandler.class.getName();
 		String disabledAnnotation = Disabled.class.getName();
 		
-		List<Class<? extends Handler>> handlers = new ArrayList<>();
+		List<Handler> handlers = new ArrayList<>();
 		try (ScanResult scanResult = new ClassGraph().enableAllInfo().whitelistPackages(pkg).scan()) {
 			for (ClassInfo handlerClassInfo : scanResult.getClassesWithAnnotation(handlerAnnotation))
-				if (!handlerClassInfo.hasAnnotation(disabledAnnotation))
-					handlers.add(handlerClassInfo.loadClass(Handler.class));
+				if (!handlerClassInfo.hasAnnotation(disabledAnnotation)) {
+					Handler handler = handlerClassInfo.loadClass(Handler.class).newInstance();
+					handler.setCommandPrefix((String) handlerClassInfo.getAnnotationInfo(handlerAnnotation).getParameterValues().getValue("value"));
+					handlers.add(handler);
+					
+				}
 		}
 		
-		log.info("Found handlers: {}", handlers.stream().map(Class::getSimpleName).collect(Collectors.toList()));
+		log.info("Found handlers: {}", handlers.stream().map(Object::getClass).map(Class::getSimpleName).collect(Collectors.toList()));
 		
 		return handlers;
 	}
