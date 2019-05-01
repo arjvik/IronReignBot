@@ -13,6 +13,7 @@ import com.arjvik.robotics.ironreignbot.handlers.Handler;
 import com.arjvik.robotics.ironreignbot.handlers.admin.AbstractAdminHandler;
 import com.arjvik.robotics.ironreignbot.handlers.annotations.Disabled;
 import com.arjvik.robotics.ironreignbot.handlers.annotations.EventHandler;
+import com.arjvik.robotics.ironreignbot.handlers.toa.TheOrangeAllianceHandler;
 
 import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
@@ -33,6 +34,7 @@ public class App {
 		String token = auth.getProperty("token");
 		
 		AbstractAdminHandler.ADMIN_USER_ID = Long.parseLong(auth.getProperty("admin"));
+		TheOrangeAllianceHandler.TOA_KEY = auth.getProperty("toa-key");
 
 		final DiscordClient client = new DiscordClientBuilder(token).build();
 		for (Handler handler : getHandlers()) {
