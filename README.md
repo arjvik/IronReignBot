@@ -12,6 +12,9 @@ Discord bot for our robotics team [Iron Reign Robotics](https://github.com/IronR
 - `!admin clear-posts`: Delete all blog posts.
 - `!admin export-posts`: Export all posts to JSON.
 - <code>!admin import-posts \`\`\`\<JSON\>\`\`\`</code>: Import blog posts from JSON.
+  
+### The Orange Alliance
+- `!toa <team>`: List team information from The Orange Alliance.
 
 ### Miscelaneous
 - `!ping`: Respond `Pong!` to test if bot is up.
