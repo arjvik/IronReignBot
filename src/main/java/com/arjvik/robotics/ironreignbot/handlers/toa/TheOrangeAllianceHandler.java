@@ -31,18 +31,19 @@ public class TheOrangeAllianceHandler extends AbstractMessageHandler {
 		try {
 			String[] cmd = content.split("\\s+");
 			if (cmd.length == 1 && cmd[0].matches("\\d+")) {
-				Team team = client.get()
-								  .uri(String.format("/team/%s", cmd[0]))
-								  .responseSingle((resp, cont) -> cont.asInputStream().map(c -> readValue(c, new TypeReference<List<Team>>() {})))
-								  .map(l -> l.get(0))
-								  .block();
-				msg.getChannel().block().createEmbed(spec -> {
-					spec.setTitle(String.format("FTC Team %s", team.getTeamNumber()));
-					spec.addField("Location", String.format("%s, %s, %s", team.getCity(), team.getStateProv(), team.getCountry()), true);
-					spec.addField("Rookie Year", String.format("%d", team.getRookieYear()), true);
-					spec.addField("Last Active", String.format("20%s-20%s", team.getLastActive().substring(0, 2), team.getLastActive().substring(2)), true);
-					spec.addField("Website", team.getWebsite(), true);
-				}).block();
+				client.get()
+					  .uri(String.format("/team/%s", cmd[0]))
+					  .responseSingle((resp, cont) -> cont.asInputStream().map(c -> readValue(c, new TypeReference<List<Team>>() {})))
+					  .map(l -> l.get(0))
+					  .flatMap(team -> msg.getChannel()
+							  			  .flatMap(chan -> chan.createEmbed(spec -> spec.setTitle(String.format("FTC Team %s", team.getTeamNumber()))
+																						.addField("Team Name", team.getTeamNameShort(), true)
+																						.addField("Location", String.format("%s, %s, %s", team.getCity(), team.getStateProv(), team.getCountry()), true)
+																						.addField("Rookie Year", String.format("%d", team.getRookieYear()), true)
+																						.addField("Last Active", String.format("20%s-20%s", team.getLastActive().substring(0, 2), team.getLastActive().substring(2)), true)
+																						.addField("Website", team.getWebsite(), true))))
+							  			  
+					  .block();
 			} else {
 				replyTo(msg, "Invalid usage of `!toa <team>`");
 			}
