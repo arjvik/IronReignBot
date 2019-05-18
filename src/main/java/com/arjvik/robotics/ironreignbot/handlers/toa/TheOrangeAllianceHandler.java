@@ -41,7 +41,7 @@ public class TheOrangeAllianceHandler extends AbstractMessageHandler {
 																						.addField("Location", String.format("%s, %s, %s", team.getCity(), team.getStateProv(), team.getCountry()), true)
 																						.addField("Rookie Year", String.format("%d", team.getRookieYear()), true)
 																						.addField("Last Active", String.format("20%s-20%s", team.getLastActive().substring(0, 2), team.getLastActive().substring(2)), true)
-																						.addField("Website", team.getWebsite(), true))))
+																						.addField("Website", team.getWebsite() != null ? team.getWebsite() : "N/A", true))))
 							  			  
 					  .block();
 			} else {
@@ -56,7 +56,7 @@ public class TheOrangeAllianceHandler extends AbstractMessageHandler {
 		try {
 			return mapper.readValue(is, type);
 		} catch (IOException e) {
-				throw new RuntimeException(e);
+			throw new RuntimeException(e);
 		}
 	}
 

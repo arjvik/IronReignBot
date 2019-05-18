@@ -58,7 +58,6 @@ public class App {
 					Handler handler = handlerClassInfo.loadClass(Handler.class).newInstance();
 					handler.setCommandPrefix((String) handlerClassInfo.getAnnotationInfo(handlerAnnotation).getParameterValues().getValue("value"));
 					handlers.add(handler);
-					
 				}
 		}
 		
