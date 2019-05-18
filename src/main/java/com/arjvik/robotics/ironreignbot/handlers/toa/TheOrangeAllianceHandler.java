@@ -39,9 +39,8 @@ public class TheOrangeAllianceHandler extends AbstractMessageHandler {
 							  			  .flatMap(chan -> chan.createEmbed(spec -> spec.setTitle(String.format("FTC Team %s", team.getTeamNumber()))
 																						.addField("Team Name", team.getTeamNameShort(), true)
 																						.addField("Location", String.format("%s, %s, %s", team.getCity(), team.getStateProv(), team.getCountry()), true)
-																						.addField("Rookie Year", String.format("%d", team.getRookieYear()), true)
-																						.addField("Last Active", String.format("20%s-20%s", team.getLastActive().substring(0, 2), team.getLastActive().substring(2)), true)
-																						.addField("Website", team.getWebsite() != null ? team.getWebsite() : "N/A", true))))
+																						.addField("Active", String.format("%d-20%s", team.getRookieYear(), team.getLastActive().substring(2)), true)
+																						.addField("Website", team.getWebsite() != null ? team.getWebsite() : "N/A", false))))
 							  			  
 					  .block();
 			} else {
