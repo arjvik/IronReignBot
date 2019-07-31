@@ -4,7 +4,7 @@
   <groupId>com.arjvik.robotics</groupId>
   <artifactId>ironreignbot</artifactId>
   <name>ironreignbot</name>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
   <url>http://maven.apache.org</url>
   <build>
     <plugins>
