@@ -2,6 +2,7 @@ package com.arjvik.robotics.ironreignbot;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
@@ -33,7 +34,10 @@ public class App {
 
 		String token = auth.getProperty("token");
 		
-		AbstractAdminHandler.ADMIN_USER_ID = Long.parseLong(auth.getProperty("admin"));
+		AbstractAdminHandler.ADMIN_USER_IDS = Arrays.stream(auth.getProperty("admin").split(","))
+													.map(String::trim)
+													.map(Long::parseLong)
+													.collect(Collectors.toList());
 		TheOrangeAllianceHandler.TOA_KEY = auth.getProperty("toa-key");
 
 		final DiscordClient client = new DiscordClientBuilder(token).build();
