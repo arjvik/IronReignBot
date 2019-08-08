@@ -38,8 +38,10 @@ public class PostListHandler extends AbstractMessageHandler {
 				}
 				message.append("\n");
 			}
-			if (message.length() > 0)
+			if (message.length() > 0) {
+				message.append("\n\nIronReignBot made by Arjun Vikram");
 				replyTo(msg, message.toString());
+			}
 			else
 				replyTo(msg, "Nobody has any blog posts yet.");
 		} else if (store.getAllBlogPosts().containsKey(userID) && !store.getBlogPosts(userID).isEmpty()) {

@@ -7,7 +7,7 @@ import com.arjvik.robotics.ironreignbot.BlogPost;
 
 public interface BlogPostStore {
 	
-	public static final BlogPostStore store = new InMemoryStore();
+	public static final BlogPostStore store = new PersistentJsonStore();
 	
 	public void assignBlogPost(long userID, BlogPost post);
 	
