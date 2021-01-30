@@ -1,8 +1,8 @@
 package com.arjvik.robotics.ironreignbot.handlers;
 
-import discord4j.core.DiscordClient;
+import discord4j.core.GatewayDiscordClient;
 
 public interface Handler {
 	public void setCommandPrefix(String prefix);
-	public void setupRoute(DiscordClient client);
+	public void setupRoute(GatewayDiscordClient client);
 }

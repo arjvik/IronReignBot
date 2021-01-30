@@ -18,7 +18,7 @@ public class LoggingHandler extends AbstractMessageHandler {
 		log.info("{} <@{}>: \"{}\"",
 				msg.getAuthor().get().getUsername(),
 				msg.getAuthor().get().getId().asLong(),
-				msg.getContent().get());
+				msg.getContent());
 	}
 
 }

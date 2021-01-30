@@ -16,7 +16,6 @@ import com.arjvik.robotics.ironreignbot.handlers.annotations.Disabled;
 import com.arjvik.robotics.ironreignbot.handlers.annotations.EventHandler;
 import com.arjvik.robotics.ironreignbot.handlers.toa.TheOrangeAllianceHandler;
 
-import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
@@ -26,7 +25,7 @@ public class App {
 	
 	private static Logger log = LoggerFactory.getLogger(App.class);
 
-	public static void main(String[] args) throws IOException, ReflectiveOperationException {
+	public static void main(String[] args) throws IOException {
 
 		Properties auth = new Properties();
 
@@ -40,17 +39,20 @@ public class App {
 													.collect(Collectors.toList());
 		TheOrangeAllianceHandler.TOA_KEY = auth.getProperty("toa-key");
 
-		final DiscordClient client = new DiscordClientBuilder(token).build();
-		for (Handler handler : getHandlers()) {
-			handler.setupRoute(client);
-		}
-
-		client.login().block();
+		DiscordClientBuilder.create(token)
+							.build()
+							.withGateway(client -> {
+								for (Handler handler : getHandlers()) {
+									handler.setupRoute(client);
+								}
+								return client.onDisconnect();
+							})
+							.block();
 
 	}
 	
 	
-	private static List<Handler> getHandlers() throws ReflectiveOperationException {
+	private static List<Handler> getHandlers() {
 		String pkg = Handler.class.getPackage().getName();
 		String handlerAnnotation = EventHandler.class.getName();
 		String disabledAnnotation = Disabled.class.getName();
@@ -63,6 +65,8 @@ public class App {
 					handler.setCommandPrefix((String) handlerClassInfo.getAnnotationInfo(handlerAnnotation).getParameterValues().getValue("value"));
 					handlers.add(handler);
 				}
+		} catch (ReflectiveOperationException e) {
+			throw new RuntimeException(e);
 		}
 		
 		log.info("Found handlers: {}", handlers.stream().map(Object::getClass).map(Class::getSimpleName).collect(Collectors.toList()));

@@ -1,6 +1,6 @@
 package com.arjvik.robotics.ironreignbot.handlers;
 
-import discord4j.core.DiscordClient;
+import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.Message;
 
@@ -14,11 +14,16 @@ public abstract class AbstractMessageHandler implements Handler {
 	}
 
 	@Override
-	public void setupRoute(DiscordClient client) {
+	public void setupRoute(GatewayDiscordClient client) {
 		client.getEventDispatcher()
 			  .on(MessageCreateEvent.class)
-			  .filter(e -> e.getMessage().getContent().map(s -> s.startsWith(prefix)).orElse(false))
-			  .subscribe(e -> onMessageEvent(e.getMessage(), e.getMessage().getContent().map(s -> s.substring(prefix.length()).trim()).orElse(null)));
+			  .filter(e -> e.getMessage()
+					  		.getContent()
+					  		.startsWith(prefix))
+			  .subscribe(e -> onMessageEvent(e.getMessage(), e.getMessage()
+					  										  .getContent()
+					  										  .substring(prefix.length())
+					  										  .trim()));
 	}
 	
 	protected abstract void onMessageEvent(Message msg, String content);
