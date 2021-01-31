@@ -6,8 +6,7 @@
 		</encoder>
 	</appender>
 
-	<appender name="SENTRY" class="io.sentry.logback.SentryAppender">
-	</appender>
+	<appender name="SENTRY" class="io.sentry.logback.SentryAppender" />
 
 	<root level="info">
 		<appender-ref ref="STDOUT" />

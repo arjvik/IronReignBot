@@ -1,5 +1,8 @@
 package com.arjvik.robotics.ironreignbot.handlers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.Message;
@@ -7,6 +10,8 @@ import discord4j.core.object.entity.Message;
 public abstract class AbstractMessageHandler implements Handler {
 	
 	protected String prefix;
+
+	protected Logger log = LoggerFactory.getLogger(getClass());
 	
 	@Override
 	public void setCommandPrefix(String prefix) {
@@ -20,10 +25,18 @@ public abstract class AbstractMessageHandler implements Handler {
 			  .filter(e -> e.getMessage()
 					  		.getContent()
 					  		.startsWith(prefix))
-			  .subscribe(e -> onMessageEvent(e.getMessage(), e.getMessage()
-					  										  .getContent()
-					  										  .substring(prefix.length())
-					  										  .trim()));
+			  .subscribe(this::dispatchMessageCreateEvent);
+	}
+	
+	protected void dispatchMessageCreateEvent(MessageCreateEvent e) {
+		log.info("{} <@{}>: \"{}\"",
+				e.getMessage().getAuthor().get().getUsername(),
+				e.getMessage().getAuthor().get().getId().asLong(),
+				e.getMessage().getContent());
+		onMessageEvent(e.getMessage(), e.getMessage()
+										.getContent()
+										.substring(prefix.length())
+			  						  	.trim());
 	}
 	
 	protected abstract void onMessageEvent(Message msg, String content);

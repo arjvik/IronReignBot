@@ -26,10 +26,7 @@ public abstract class AbstractAdminHandler extends AbstractMessageHandler {
 			  .filter(e -> e.getMessage()
 					  		.getContent()
 					  		.startsWith(prefix))
-			  .subscribe(e -> onMessageEvent(e.getMessage(), e.getMessage()
-					  										  .getContent()
-					  										  .substring(prefix.length())
-					  										  .trim()));
+			  .subscribe(this::dispatchMessageCreateEvent);
 	}
 	
 }
